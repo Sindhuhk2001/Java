@@ -1,0 +1,110 @@
+package com.library;
+import java.util.*;
+   
+public class Library {
+	 static List<Library> bookList = new ArrayList<>();
+
+   
+    	private static String title;
+        private String author;
+    	private int id;
+    	private int price;
+    	
+     Library(String title,String author,int id,int price) {
+    	  this.title=title;
+    	  this.author=author;
+    	  this.id=id;
+    	  this.price=price;
+    		
+    	}
+      public static String getTitle() {
+          return title;
+      }
+      public String getAuthor() {
+          return author;
+      }
+      public int getid() {
+          return id;
+      }
+      public int getprice() {
+          return price;
+      }
+  
+      public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int choice = 0;
+        while(choice!=4) {
+            System.out.println("Enter your choice:");
+            System.out.println("1: Add new book");
+            System.out.println("2: Search for a book");
+            System.out.println("3: List all books");
+            System.out.println("4: Exit");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    addNewBook(scanner);
+                    break;
+                case 2:
+                    searchForBook(scanner);
+                    break;
+                case 3:
+                    listAllBooks();
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
+            }
+        }
+    }
+
+    private static void addNewBook(Scanner scanner) {
+        System.out.println("Enter the title of the book:");
+        String title = scanner.next();
+        System.out.println("Enter the author of the book:");
+        String author = scanner.next();
+        System.out.println("Enter the id of the book:");
+        int id = scanner.nextInt();
+        System.out.println("Enter the price of the book:");
+        int price = scanner.nextInt();
+
+        Library book = new Library(title, author, id, price);
+        bookList.add(book);
+        System.out.println("Book added successfully!");
+    }
+    
+    private static void searchForBook(Scanner scanner) {
+        System.out.println("Enter the title of the book to search:");
+        String title = scanner.next();
+
+        boolean found = false;
+        for (Library book : bookList) {
+            if (book.getTitle().equalsIgnoreCase(title)) {
+                System.out.println("Book found! Author: " + book.getAuthor());
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Book not found.");
+        }
+    }
+
+   
+
+	private static void listAllBooks() {
+        if (bookList.isEmpty()) {
+            System.out.println("No books available.");
+     
+       }
+        else {
+        	System.out.println("List all the Book");
+        	System.out.println(Library.getTitle());
+        }
+    }
+
+}
