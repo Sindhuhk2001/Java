@@ -1,0 +1,118 @@
+package com.ExceptionHandling;
+
+import java.util.*;
+class NegativeAmountException extends Exception{
+	public String getMessage() {
+		return "u have entered negative amount";
+	}
+}
+class InsufficientBalanceException extends Exception{
+	public String getMessage() {
+		return "u have insufficient balance";
+	}
+}
+class Bank{
+	static {
+		System.out.println("Welcome to SBIbank");
+	}
+	int bal=500;
+
+	void balance() {
+	System.out.println("the balance is"+bal);
+}
+	
+void deposite(int amt)  {
+	try {
+	
+		if(amt<=0) {
+			throw new NegativeAmountException();
+		}
+		else {
+			bal=amt+bal;
+		}
+	 
+		}
+	 catch(NegativeAmountException e) {
+		System.out.println(e.getMessage());
+	}
+	}
+	
+	
+
+
+void withdraw(int amt)  {
+	if(bal>amt) {
+		bal=bal-amt;
+	}
+	else {
+		try {
+			throw new InsufficientBalanceException();
+		}
+		 catch(InsufficientBalanceException e) {
+			System.out.println(e.getMessage());
+			
+		}
+		
+	}
+		
+	}
+	
+
+
+public class Exception {
+public static void main(String[]args)  {
+		
+		Bank b=new Bank();
+		int choice=0;
+		int attempts=0;
+		final int pin=12345;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("enter the pin");
+		int pin1=sc.nextInt();
+		while(pin!=pin1) {
+			System.out.println("invalid pin");
+			System.out.println("enter the valid pin");
+			pin1=sc.nextInt();
+			attempts++;
+			if(attempts==2) {
+				System.out.println("please Contact your Bank Manager!!!");
+				break;
+			}
+			
+		}
+	if(pin==pin1) {
+		while(choice<=4)
+		{
+		
+         System.out.println("The following options are:");
+         System.out.println("1.Deposit");
+         System.out.println("2.Account Balance");
+         System.out.println("3.withdraw");
+         System.out.println("4.Exit");
+         System.out.println("Enter the Choice");
+         choice=sc.nextInt();
+          
+        	 switch(choice) {
+        	 case 1:System.out.println("enter the amt");
+        	 int amt=sc.nextInt();
+          	 b.deposite(amt);
+        	 break;
+        	 case 2:b.balance();
+        	 break;
+        	 case 3:System.out.println("enter the amt");
+        	 amt=sc.nextInt();
+        	 b.withdraw(amt);
+        	 break;
+        	 case 4:System.out.println("Thanks visit again");
+        	 break;
+        	 default: System.out.println("select a valid option");
+        	 }
+         }
+	}
+	}
+
+	}	
+	
+	
+}
+
